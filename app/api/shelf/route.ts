@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     } catch (error) {
         return NextResponse.json(
-            { error: 'Erro ao criar livro' },
+            { error: `Erro ao criar livro ${error}` },
             { status: 500 }
         )
     }
