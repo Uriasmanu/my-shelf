@@ -5,5 +5,8 @@ export interface Book {
     author: string;
     currentPage: number;
     progress: number;
+    totalPages: number,
     createdAt: string;
+    status: 'reading' | 'completed' | 'on-hold' | 'dropped' | 'plan-to-read';
+    avaliation?:  0 | 1 | 2 | 3 | 4 | 5
 }

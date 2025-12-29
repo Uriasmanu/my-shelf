@@ -16,8 +16,11 @@ export async function POST(request: NextRequest) {
             name: body.name,
             category: body.category,
             author: body.author,
+            status: body.status,
             currentPage: 0,
+            totalPages: body.totalPages,
             progress: 0,
+            avaliation: body.avaliation || 0,
             createdAt: new Date().toISOString()
         };
 
