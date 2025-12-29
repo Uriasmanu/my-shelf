@@ -6,7 +6,7 @@ export default function Home() {
       <NavBar />
 
       <main className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Header */}
+
         <header className="mb-10">
           <h1 className="text-3xl font-bold text-slate-900">Olá, Leitor</h1>
           <p className="text-slate-500 mt-1">
@@ -15,9 +15,8 @@ export default function Home() {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left column */}
+
           <div className="lg:col-span-2 space-y-8">
-            {/* Lendo agora */}
             <section>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-slate-800">
@@ -103,7 +102,6 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Biblioteca */}
             <section>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold text-slate-800">
@@ -124,7 +122,6 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {/* Card */}
                 <div className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm cursor-pointer hover:-translate-y-1 transition">
                   <img
                     src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=800&auto=format&fit=crop"
@@ -142,7 +139,6 @@ export default function Home() {
                   </span>
                 </div>
 
-                {/* Add card */}
                 <div className="bg-white p-3 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-300">
                   <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center mb-2">
                     <span className="text-slate-400 text-2xl">+</span>
@@ -155,7 +151,6 @@ export default function Home() {
             </section>
           </div>
 
-          {/* Right column */}
           <div className="space-y-8">
             <section className="bg-indigo-900 text-white rounded-2xl p-6 shadow-lg">
               <h3 className="text-lg font-bold mb-4">
