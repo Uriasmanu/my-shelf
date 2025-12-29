@@ -40,7 +40,7 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="flex-grow flex flex-col justify-between">
+                <div className="grow flex flex-col justify-between">
                   <div>
                     <span className="inline-block px-2 py-1 rounded bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-wider mb-2">
                       Ficção Científica
@@ -201,9 +201,6 @@ export default function Home() {
                 </div>
               </div>
 
-              <button className="w-full mt-6 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition">
-                Ver Relatório Completo
-              </button>
             </section>
           </div>
         </div>
