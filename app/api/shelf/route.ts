@@ -15,6 +15,9 @@ export async function POST(request: NextRequest) {
             id: Date.now().toString(),
             name: body.name,
             category: body.category,
+            author: body.author,
+            currentPage: 0,
+            progress: 0,
             createdAt: new Date().toISOString()
         };
 
