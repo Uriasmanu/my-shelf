@@ -15,7 +15,7 @@ interface FormBook {
     author: string;
     totalPages: string,
     status: 'reading' | 'completed' | 'on-hold' | 'dropped' | 'plan-to-read';
-    avaliation: 0 | 1 | 2 | 3 | 4 | 5 ;
+    avaliation: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 
@@ -140,7 +140,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 id="status"
                                 value={formData.status}
                                 onChange={handleInputChange}
-                                disabled={isSubmitting} 
+                                disabled={isSubmitting}
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                             >
                                 <option value="plan-to-read">Planejo Ler</option>
@@ -177,7 +177,10 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                         key={star}
                                         type="button"
                                         onClick={() => handleRatingClick(star)}
-                                        className="text-2xl text-slate-300 hover:text-yellow-400 transition-colors"
+                                        className={`text-2xl transition-colors ${formData.avaliation >= star
+                                                ? 'text-yellow-400'
+                                                : 'text-slate-300 hover:text-yellow-400'
+                                            } disabled:opacity-50`}
                                         aria-label={`Avaliar com ${star} estrelas`}
                                         disabled={isSubmitting}
                                     >
