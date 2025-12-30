@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 
         const newBook: Book = {
             id: Date.now().toString(),
-            name: body.name,
+            titulo: body.titulo,
             category: body.category,
             author: body.author,
             status: body.status,

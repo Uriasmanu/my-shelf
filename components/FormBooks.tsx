@@ -1,5 +1,6 @@
+import { Book } from "@/app/models/Book";
 import { X } from "lucide-react";
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useState } from "react";
 
 
 interface FormBooksProps {
@@ -8,8 +9,47 @@ interface FormBooksProps {
     isModalOpen: boolean;
 }
 
+interface FormBook {
+    titulo: string;
+    category: string;
+    author: string;
+    totalPages: string,
+    status: 'reading' | 'completed' | 'on-hold' | 'dropped' | 'plan-to-read';
+    avaliation: 0 | 1 | 2 | 3 | 4 | 5 ;
+}
+
 
 export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen }: FormBooksProps) {
+
+    const [formData, setFormData] = useState<FormBook>({
+        titulo: '',
+        category: '',
+        author: '',
+        totalPages: '',
+        status: 'plan-to-read',
+        avaliation: 0,
+    });
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { id, value } = e.target;
+
+        setFormData(prevData => ({
+            ...prevData,
+            [id]: id === 'totalPages' || id === 'avaliation' ?
+                (value === '' ? '' : value) :
+                value
+        }));
+    }
+
+    const handleRatingClick = (rating: number) => {
+        setFormData(prevData => ({
+            ...prevData,
+            avaliation: rating as 0 | 1 | 2 | 3 | 4 | 5
+        }))
+    }
 
     return (
         <div className="font-sans">
@@ -35,6 +75,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                         onClick={closeModal}
                         className="p-2 rounded-full hover:bg-slate-100 transition-colors"
                         aria-label="Fechar"
+                        disabled={isSubmitting}
                     >
                         <X size={24} className="text-slate-500" />
                     </button>
@@ -53,6 +94,9 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 placeholder="Digite o título do livro"
                                 required
                                 autoFocus
+                                value={formData.titulo}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -66,6 +110,9 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                                 placeholder="Nome do autor"
                                 required
+                                value={formData.author}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -79,6 +126,9 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                                 placeholder="Nome da categoria"
                                 required
+                                value={formData.category}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -88,12 +138,16 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                             </label>
                             <select
                                 id="status"
+                                value={formData.status}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting} 
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                             >
-                                <option value="to-read">Planejo Ler</option>
+                                <option value="plan-to-read">Planejo Ler</option>
                                 <option value="reading">Lendo</option>
                                 <option value="completed">Concluído</option>
-                                <option value="paused">Pausado</option>
+                                <option value="on-hold">Pausado</option>
+                                <option value="dropped">Desistido</option>
                             </select>
                         </div>
 
@@ -107,6 +161,9 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                                 placeholder="Total de páginas"
                                 min="1"
+                                value={formData.totalPages}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -119,13 +176,20 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                     <button
                                         key={star}
                                         type="button"
+                                        onClick={() => handleRatingClick(star)}
                                         className="text-2xl text-slate-300 hover:text-yellow-400 transition-colors"
                                         aria-label={`Avaliar com ${star} estrelas`}
+                                        disabled={isSubmitting}
                                     >
                                         ★
                                     </button>
                                 ))}
                             </div>
+                            {formData.avaliation > 0 && (
+                                <p className="mt-2 text-sm text-slate-500">
+                                    Avaliação: {formData.avaliation} estrela{formData.avaliation !== 1 ? 's' : ''}
+                                </p>
+                            )}
                         </div>
 
                         <div className="sticky bottom-0 bg-white p-6 border-t border-slate-200 z-10">
@@ -133,12 +197,14 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 <button
                                     type="button"
                                     onClick={closeModal}
+                                    disabled={isSubmitting}
                                     className="flex-1 px-4 py-3 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition"
                                 >
                                     Cancelar
                                 </button>
                                 <button
                                     type="submit"
+                                    disabled={isSubmitting}
                                     className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition"
                                 >
                                     Salvar Leitura
