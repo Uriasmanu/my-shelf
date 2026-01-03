@@ -3,25 +3,10 @@
 import { useState } from "react";
 import { BookOpen, ChartSpline, CircleUserRound, HomeIcon, X } from "lucide-react";
 import FormBooks from "./FormBooks";
+import { useModalAdicionar } from "@/hooks/useModalAdicionar";
 
 export default function NavBar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    document.body.style.overflow = 'auto';
-  };
-
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  }
+    const { isModalOpen, openModal, closeModal, handleOverlayClick } = useModalAdicionar();
 
   return (
     <div className="font-sans">
@@ -39,7 +24,7 @@ export default function NavBar() {
             </div>
             <button
               onClick={openModal}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition"
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer"
             >
               + Nova Leitura
             </button>

@@ -1,6 +1,13 @@
+'use client';
+
+import CardBiblioteca from "@/components/CardBiblioteca";
+import FormBooks from "@/components/FormBooks";
 import NavBar from "@/components/NavBar";
+import { useModalAdicionar } from "@/hooks/useModalAdicionar";
 
 export default function Home() {
+  const { isModalOpen, openModal, closeModal, handleOverlayClick } = useModalAdicionar();
+
   return (
     <div className="text-slate-800 bg-slate-50 min-h-screen">
       <NavBar />
@@ -122,31 +129,28 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <div className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm cursor-pointer hover:-translate-y-1 transition">
-                  <img
-                    src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=800&auto=format&fit=crop"
-                    className="w-full aspect-[2/3] object-cover rounded-lg mb-3"
-                    alt=""
-                  />
-                  <h4 className="font-bold text-sm truncate">
-                    O Alquimista
-                  </h4>
-                  <p className="text-xs text-slate-500">
-                    Paulo Coelho
-                  </p>
-                  <span className="text-yellow-400 text-xs font-bold">
-                    ★ 4.8
-                  </span>
-                </div>
+                <CardBiblioteca
+                  title={""}
+                  author={""}
+                  rating={0}
+                  linkedImage={""}
+                />
 
-                <div className="bg-white p-3 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-300">
+                <button
+                  onClick={openModal}
+                  className="bg-white p-3 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:border-indigo-300">
                   <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center mb-2">
                     <span className="text-slate-400 text-2xl">+</span>
                   </div>
-                  <span className="text-xs font-medium text-slate-400">
+                  <span className="text-xs font-medium text-slate-400 cursor-pointer">
                     Adicionar Livro
                   </span>
-                </div>
+                </button>
+
+                {/* Overlay e Modal */}
+                {isModalOpen && (
+                  <FormBooks handleOverlayClick={handleOverlayClick} closeModal={closeModal} isModalOpen={isModalOpen} />
+                )}
               </div>
             </section>
           </div>
@@ -199,6 +203,8 @@ export default function Home() {
             </section>
           </div>
         </div>
+
+
       </main>
     </div>
   );

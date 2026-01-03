@@ -1,4 +1,3 @@
-import { Book } from "@/app/models/Book";
 import { X } from "lucide-react";
 import React, { MouseEvent, useState } from "react";
 
@@ -77,7 +76,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                         aria-label="Fechar"
                         disabled={isSubmitting}
                     >
-                        <X size={24} className="text-slate-500" />
+                        <X size={24} className="text-slate-500 cursor-pointer" />
                     </button>
                 </div>
 
