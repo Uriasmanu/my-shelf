@@ -1,5 +1,6 @@
 export interface Book {
     id: string;
+    imageUrl: string;
     titulo: string;
     category: string;
     author: string;

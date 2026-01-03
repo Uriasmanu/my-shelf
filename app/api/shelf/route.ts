@@ -21,7 +21,8 @@ export async function POST(request: NextRequest) {
             totalPages: body.totalPages,
             progress: 0,
             avaliation: body.avaliation || 0,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            imageUrl: body.imageUrl
         };
 
         books.push(newBook);

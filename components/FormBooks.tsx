@@ -10,6 +10,7 @@ interface FormBooksProps {
 
 interface FormBook {
     titulo: string;
+    imageUrl: string;
     category: string;
     author: string;
     totalPages: string,
@@ -22,6 +23,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
 
     const [formData, setFormData] = useState<FormBook>({
         titulo: '',
+        imageUrl: '',
         category: '',
         author: '',
         totalPages: '',
@@ -94,6 +96,22 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 required
                                 autoFocus
                                 value={formData.titulo}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="book-image" className="block text-sm font-medium text-slate-700 mb-2">
+                                Imagem do Livro *
+                            </label>
+                            <input
+                                type="text"
+                                id="book-title"
+                                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                placeholder="Digite o título do livro"
+                                required
+                                autoFocus
+                                value={formData.imageUrl}
                                 onChange={handleInputChange}
                                 disabled={isSubmitting}
                             />
@@ -177,8 +195,8 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                         type="button"
                                         onClick={() => handleRatingClick(star)}
                                         className={`text-2xl transition-colors ${formData.avaliation >= star
-                                                ? 'text-yellow-400'
-                                                : 'text-slate-300 hover:text-yellow-400'
+                                            ? 'text-yellow-400'
+                                            : 'text-slate-300 hover:text-yellow-400'
                                             } disabled:opacity-50`}
                                         aria-label={`Avaliar com ${star} estrelas`}
                                         disabled={isSubmitting}
