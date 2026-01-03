@@ -1,7 +1,7 @@
 export interface Book {
     id: string;
     imageUrl: string;
-    titulo: string;
+    title: string;
     category: string;
     author: string;
     currentPage: number;
@@ -9,5 +9,5 @@ export interface Book {
     totalPages: string,
     createdAt: string;
     status: 'reading' | 'completed' | 'on-hold' | 'dropped' | 'plan-to-read';
-    avaliation?:  0 | 1 | 2 | 3 | 4 | 5
+    rating?:  0 | 1 | 2 | 3 | 4 | 5
 }

@@ -137,7 +137,7 @@ export default function Home() {
                     title={book.title}
                     author={book.author}
                     rating={book.rating}
-                    linkedImage={book.linkedImage}
+                    imageUrl={book.imageUrl}
                   />
                 ))}
 

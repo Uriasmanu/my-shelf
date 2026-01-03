@@ -13,20 +13,21 @@ export async function POST(request: NextRequest) {
 
         const newBook: Book = {
             id: Date.now().toString(),
-            titulo: body.titulo,
+            title: body.titulo,
             category: body.category,
             author: body.author,
             status: body.status,
             currentPage: 0,
             totalPages: body.totalPages,
             progress: 0,
-            avaliation: body.avaliation || 0,
+            rating: body.rating || 0,
             createdAt: new Date().toISOString(),
             imageUrl: body.imageUrl
         };
 
         books.push(newBook);
-        await fs.writeFile(dataFilePath, JSON.stringify(books, null, 2))
+        await fs.writeFile(dataFilePath, JSON.stringify(books, null, 2));
+        return NextResponse.json(newBook, { status: 201 });
 
     } catch (error) {
         return NextResponse.json(
