@@ -3,10 +3,12 @@
 import CardBiblioteca from "@/components/CardBiblioteca";
 import FormBooks from "@/components/FormBooks";
 import NavBar from "@/components/NavBar";
+import { useBiblioteca } from "@/hooks/useBiblioteca";
 import { useModalAdicionar } from "@/hooks/useModalAdicionar";
 
 export default function Home() {
   const { isModalOpen, openModal, closeModal, handleOverlayClick } = useModalAdicionar();
+  const { data, loading, error } = useBiblioteca();
 
   return (
     <div className="text-slate-800 bg-slate-50 min-h-screen">
@@ -129,12 +131,16 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                <CardBiblioteca
-                  title={""}
-                  author={""}
-                  rating={0}
-                  linkedImage={""}
-                />
+                {data.map(book => (
+                  <CardBiblioteca
+                    key={book.id}
+                    title={book.title}
+                    author={book.author}
+                    rating={book.rating}
+                    linkedImage={book.linkedImage}
+                  />
+                ))}
+
 
                 <button
                   onClick={openModal}
