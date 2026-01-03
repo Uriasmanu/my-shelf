@@ -1,3 +1,4 @@
+import { useCreateBook } from "@/hooks/useCreateBook";
 import { X } from "lucide-react";
 import React, { MouseEvent, useState } from "react";
 
@@ -20,6 +21,7 @@ interface FormBook {
 
 
 export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen }: FormBooksProps) {
+    const { createBook, loading, error } = useCreateBook();
 
     const [formData, setFormData] = useState<FormBook>({
         titulo: '',
@@ -32,7 +34,6 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { id, value } = e.target;
@@ -51,6 +52,40 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
             avaliation: rating as 0 | 1 | 2 | 3 | 4 | 5
         }))
     }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            setIsSubmitting(true);
+            await createBook({
+                titulo: formData.titulo,
+                imageUrl: formData.imageUrl,
+                category: formData.category,
+                author: formData.author,
+                totalPages: formData.totalPages,
+                status: formData.status,
+                avaliation: formData.avaliation,
+            });
+
+            closeModal();
+
+            setFormData({
+                titulo: '',
+                imageUrl: '',
+                category: '',
+                author: '',
+                totalPages: '',
+                status: 'plan-to-read',
+                avaliation: 0,
+            });
+
+        } catch (error) {
+
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
 
     return (
         <div className="font-sans">
@@ -85,12 +120,12 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                 <div className="p-6 h-[calc(100%-80px)] overflow-y-auto">
                     <form className="space-y-6">
                         <div>
-                            <label htmlFor="book-title" className="block text-sm font-medium text-slate-700 mb-2">
+                            <label htmlFor="titulo" className="block text-sm font-medium text-slate-700 mb-2">
                                 Título do Livro *
                             </label>
                             <input
                                 type="text"
-                                id="book-title"
+                                id="titulo"
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                                 placeholder="Digite o título do livro"
                                 required
@@ -101,14 +136,14 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                             />
                         </div>
                         <div>
-                            <label htmlFor="book-image" className="block text-sm font-medium text-slate-700 mb-2">
+                            <label htmlFor="imageUrl" className="block text-sm font-medium text-slate-700 mb-2">
                                 Imagem do Livro *
                             </label>
                             <input
                                 type="text"
-                                id="book-title"
+                                id="imageUrl"
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                                placeholder="Digite o título do livro"
+                                placeholder="Digite o URL da capa do livro"
                                 required
                                 autoFocus
                                 value={formData.imageUrl}
@@ -169,12 +204,12 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                         </div>
 
                         <div>
-                            <label htmlFor="pages" className="block text-sm font-medium text-slate-700 mb-2">
+                            <label htmlFor="totalPages" className="block text-sm font-medium text-slate-700 mb-2">
                                 Páginas
                             </label>
                             <input
                                 type="number"
-                                id="pages"
+                                id="totalPages"
                                 className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                                 placeholder="Total de páginas"
                                 min="1"
@@ -225,6 +260,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
+                                    onClick={handleSubmit}
                                     className="flex-1 px-4 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition"
                                 >
                                     Salvar Leitura

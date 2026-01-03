@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 export interface BibliotecaItem {
-    id: number;
+    id: string;
     title: string;
     author: string;
     rating: number;
-    linkedImage: string;
+    imageUrl: string;
 }
 
 export function useBiblioteca() {
@@ -15,26 +15,26 @@ export function useBiblioteca() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    async function fetchBooks() {
+        try {
+            const res = await fetch('/api/books', { cache: 'no-store' });
+
+            if (!res.ok) {
+                throw new Error('Failed to fetch data');
+            }
+
+            const json = await res.json();
+            setData(json);
+
+        } catch (error) {
+            setError((error as Error).message);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
-        async function fetchDAta() {
-            try {
-                const res = await fetch('/data/shelf.json');
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-
-                const json = await res.json();
-                setData(json);
-
-            } catch (error) {
-                setError((error as Error).message);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchDAta();
+        fetchBooks();
     }, []);
 
     return { data, loading, error };

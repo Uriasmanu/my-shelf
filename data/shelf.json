@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "1767465851190",
+    "title": "O nome do Vento",
+    "category": "Fantasia",
+    "author": "Patrick Rothfuss",
+    "status": "reading",
+    "currentPage": 0,
+    "totalPages": "654",
+    "progress": 0,
+    "rating": 3,
+    "createdAt": "2026-01-03T18:44:11.190Z",
+    "imageUrl": "https://m.media-amazon.com/images/I/81CGmkRG9GL._AC_UF1000,1000_QL80_.jpg"
+  }
+]
