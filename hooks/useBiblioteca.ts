@@ -17,7 +17,7 @@ export function useBiblioteca() {
 
     async function fetchBooks() {
         try {
-            const res = await fetch('/api/books', { cache: 'no-store' });
+            const res = await fetch('/api/shelf', { cache: 'no-store' });
 
             if (!res.ok) {
                 throw new Error('Failed to fetch data');
