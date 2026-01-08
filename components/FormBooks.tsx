@@ -58,13 +58,13 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
         try {
             setIsSubmitting(true);
             await createBook({
-                titulo: formData.titulo,
+                title: formData.titulo,
                 imageUrl: formData.imageUrl,
                 category: formData.category,
                 author: formData.author,
                 totalPages: formData.totalPages,
                 status: formData.status,
-                avaliation: formData.avaliation,
+                rating: formData.avaliation,
             });
 
             closeModal();
