@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
       title: body.titulo,
       category: body.category,
       author: body.author,
+      synopsis: body.synopsis,
       status: body.status,
       currentPage: 0,
       totalPages: body.totalPages,

@@ -14,6 +14,7 @@ interface FormBook {
     imageUrl: string;
     category: string;
     author: string;
+    synopsis: string;
     totalPages: string,
     status: 'reading' | 'completed' | 'on-hold' | 'dropped' | 'plan-to-read';
     avaliation: 0 | 1 | 2 | 3 | 4 | 5;
@@ -28,6 +29,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
         imageUrl: '',
         category: '',
         author: '',
+        synopsis: '',
         totalPages: '',
         status: 'plan-to-read',
         avaliation: 0,
@@ -62,6 +64,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                 imageUrl: formData.imageUrl,
                 category: formData.category,
                 author: formData.author,
+                synopsis: formData.synopsis || '',
                 totalPages: formData.totalPages,
                 status: formData.status,
                 rating: formData.avaliation,
@@ -74,6 +77,7 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                 imageUrl: '',
                 category: '',
                 author: '',
+                synopsis: '',
                 totalPages: '',
                 status: 'plan-to-read',
                 avaliation: 0,
@@ -163,6 +167,22 @@ export default function FormBooks({ handleOverlayClick, closeModal, isModalOpen 
                                 placeholder="Nome do autor"
                                 required
                                 value={formData.author}
+                                onChange={handleInputChange}
+                                disabled={isSubmitting}
+                            />
+                        </div>
+
+                                                <div>
+                            <label htmlFor="author" className="block text-sm font-medium text-slate-700 mb-2">
+                                Sinopse
+                            </label>
+                            <input
+                                type="text"
+                                id="synopsis"
+                                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                                placeholder="Sinopse do livro"
+                                required
+                                value={formData.synopsis}
                                 onChange={handleInputChange}
                                 disabled={isSubmitting}
                             />

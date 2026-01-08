@@ -4,6 +4,7 @@ export interface Book {
     title: string;
     category: string;
     author: string;
+    synopsis: string;
     currentPage: number;
     progress: number;
     totalPages: string,
