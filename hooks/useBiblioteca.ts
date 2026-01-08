@@ -8,6 +8,7 @@ export interface BibliotecaItem {
     author: string;
     rating: number;
     imageUrl: string;
+    synopsis: string;
 }
 
 export function useBiblioteca() {

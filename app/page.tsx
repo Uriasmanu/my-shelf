@@ -1,6 +1,7 @@
 'use client';
 
-import CardBiblioteca from "@/components/CardBiblioteca";
+
+import BookDetails from "@/components/BookDetails";
 import FormBooks from "@/components/FormBooks";
 import NavBar from "@/components/NavBar";
 import { useBiblioteca } from "@/hooks/useBiblioteca";
@@ -132,12 +133,13 @@ export default function Home() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {data.map(book => (
-                  <CardBiblioteca
+                  <BookDetails
                     key={book.id}
                     title={book.title}
                     author={book.author}
                     rating={book.rating}
                     imageUrl={book.imageUrl}
+                    synopsis={book.synopsis}
                   />
                 ))}
 
