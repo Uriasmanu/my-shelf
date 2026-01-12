@@ -32,12 +32,6 @@ export default function Home() {
                 <h2 className="text-xl font-bold text-slate-800">
                   Lendo Agora
                 </h2>
-                <a
-                  href="#"
-                  className="text-sm text-indigo-600 font-medium hover:underline"
-                >
-                  Ver detalhes
-                </a>
               </div>
 
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row gap-6">
